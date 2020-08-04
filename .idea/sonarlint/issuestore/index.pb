@@ -53,3 +53,11 @@ Napp/src/main/java/br/com/alura/aluraesporte/ui/viewmodel/EstadoAppViewModel.kt
 ]app/src/main/java/br/com/alura/aluraesporte/ui/recyclerview/adapter/ListaPagamentosAdapter.kt,a/9/a9cc3291c97da4f0091ccb4211926e2237af686d
 x
 Happ/src/main/java/br/com/alura/aluraesporte/ui/fragment/LoginFragment.kt,d/e/de6fb553265b4e3031c6fe36c2a239f3887001eb
+n
+>app/src/test/java/br/com/alura/aluraesporte/ExampleUnitTest.kt,8/e/8eb960c6f8a08329f1c7bace77157414e8b54525
+~
+Napp/src/main/java/br/com/alura/aluraesporte/extensions/BigDecimalExtensions.kt,6/0/60da4af248514d544a003f1202d3ac79088013fe
+„
+Tapp/src/main/java/br/com/alura/aluraesporte/ui/viewmodel/DetalhesProdutoViewModel.kt,a/9/a9c7ca95def2ab2d984a5f38529676638ac29602
+Œ
+\app/src/test/java/br/com/alura/aluraesporte/ui/viewmodel/DetalhesProdutoViewModelTest.groovy,0/6/069f6f91223430357ffcb22fba4a4950f3fcc5c7
