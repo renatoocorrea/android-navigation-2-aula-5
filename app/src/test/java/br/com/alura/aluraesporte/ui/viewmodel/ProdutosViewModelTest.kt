@@ -19,6 +19,11 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ProdutosViewModelTest {
 
+    // Alguns mocks dessa classe não são utilizados.
+    // Nome da função está estranho.
+    // Não existe divisão de Arrange, Act, Assert.
+    // Busca por Id ou BuscaTodos?
+
     @io.mockk.impl.annotations.MockK
     private lateinit var detalhesProdutoViewModel: DetalhesProdutoViewModel
 

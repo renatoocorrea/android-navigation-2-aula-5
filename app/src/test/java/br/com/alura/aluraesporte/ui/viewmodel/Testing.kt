@@ -17,7 +17,10 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class Testing {
+class DetalhesProdutoViewModelTest {
+
+    // Nome da função está estranho.
+    // Não existe divisão de Arrange, Act, Assert.
 
     @io.mockk.impl.annotations.MockK
     private lateinit var detalhesProdutoViewModel: DetalhesProdutoViewModel
