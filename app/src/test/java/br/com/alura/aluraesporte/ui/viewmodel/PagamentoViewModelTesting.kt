@@ -1,6 +1,8 @@
 package br.com.alura.aluraesporte.ui.viewmodel
 
+import androidx.lifecycle.LiveData
 import br.com.alura.aluraesporte.model.Pagamento
+import br.com.alura.aluraesporte.model.Produto
 import br.com.alura.aluraesporte.repository.PagamentoRepository
 import br.com.alura.aluraesporte.repository.ProdutoRepository
 import br.com.alura.aluraesporte.repository.Resource
@@ -16,9 +18,6 @@ class PagamentoViewModelTesting {
     // Alguns mocks dessa classe não são utilizados.
     // Nome da função está estranho.
     // Não existe divisão de Arrange, Act, Assert.
-
-    @io.mockk.impl.annotations.MockK
-    private lateinit var detalhesProdutoViewModel: DetalhesProdutoViewModel
 
     @io.mockk.impl.annotations.MockK
     private lateinit var produtosRepository: ProdutoRepository
@@ -37,7 +36,7 @@ class PagamentoViewModelTesting {
     }
 
     @Test
-    fun salva_checkSalve() {
+    fun salva_salvaPagamentoDoCartao_sucesso() {
         val pagamento =  Pagamento(
             1.toLong(),
             123,
@@ -46,15 +45,28 @@ class PagamentoViewModelTesting {
             200.toBigDecimal(),
             1.toLong()
         )
+
         every { pagamentoRepository.salva(pagamento).value } returns Resource(1.toLong())
-
         every { pagamentoRepository.todos().value } returns listOf(pagamento)
-
         pagamentoViewModel = PagamentoViewModel(pagamentoRepository, produtosRepository)
-
         pagamentoViewModel.salva(pagamento)
         val pagamentoSalvo = pagamentoViewModel.todos()
-        Assert.assertEquals(123, pagamentoSalvo.value?.get(0)?.numeroCartao)
 
+        Assert.assertEquals(123, pagamentoSalvo.value?.get(0)?.numeroCartao)
+    }
+
+    @Test
+    fun buscaProdutoPorId_pesquisaUmProdutoPorSeuId_trazProdutoPesquisado(){
+        val produto = Produto(
+            2,
+            "Teste",
+            160.toBigDecimal()
+        )
+
+        every { produtosRepository.buscaPorId(produto.id).value } returns produto
+        pagamentoViewModel = PagamentoViewModel(pagamentoRepository, produtosRepository)
+        val produtoCheck = pagamentoViewModel.buscaProdutoPorId(produto.id)
+
+        Assert.assertEquals(produto, produtoCheck.value)
     }
 }
