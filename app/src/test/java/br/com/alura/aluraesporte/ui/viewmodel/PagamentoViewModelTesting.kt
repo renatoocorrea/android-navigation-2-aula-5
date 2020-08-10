@@ -1,6 +1,5 @@
 package br.com.alura.aluraesporte.ui.viewmodel
 
-import androidx.lifecycle.LiveData
 import br.com.alura.aluraesporte.model.Pagamento
 import br.com.alura.aluraesporte.model.Produto
 import br.com.alura.aluraesporte.repository.PagamentoRepository
@@ -37,6 +36,7 @@ class PagamentoViewModelTesting {
 
     @Test
     fun salva_salvaPagamentoDoCartao_sucesso() {
+        //Arrange
         val pagamento =  Pagamento(
             1.toLong(),
             123,
@@ -46,27 +46,32 @@ class PagamentoViewModelTesting {
             1.toLong()
         )
 
+        //Act
         every { pagamentoRepository.salva(pagamento).value } returns Resource(1.toLong())
         every { pagamentoRepository.todos().value } returns listOf(pagamento)
         pagamentoViewModel = PagamentoViewModel(pagamentoRepository, produtosRepository)
         pagamentoViewModel.salva(pagamento)
-        val pagamentoSalvo = pagamentoViewModel.todos()
 
+        //Assert
+        val pagamentoSalvo = pagamentoViewModel.todos()
         Assert.assertEquals(123, pagamentoSalvo.value?.get(0)?.numeroCartao)
     }
 
     @Test
     fun buscaProdutoPorId_pesquisaUmProdutoPorSeuId_trazProdutoPesquisado(){
+        //Arrange
         val produto = Produto(
             2,
             "Teste",
             160.toBigDecimal()
         )
 
+        //Act
         every { produtosRepository.buscaPorId(produto.id).value } returns produto
         pagamentoViewModel = PagamentoViewModel(pagamentoRepository, produtosRepository)
-        val produtoCheck = pagamentoViewModel.buscaProdutoPorId(produto.id)
 
+        //Assert
+        val produtoCheck = pagamentoViewModel.buscaProdutoPorId(produto.id)
         Assert.assertEquals(produto, produtoCheck.value)
     }
 }

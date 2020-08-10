@@ -1,17 +1,12 @@
 package br.com.alura.aluraesporte.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import br.com.alura.aluraesporte.database.dao.ProdutoDAO
 import br.com.alura.aluraesporte.model.Produto
 import br.com.alura.aluraesporte.repository.ProdutoRepository
-import io.mockk.MockK
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.mockkClass
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -23,9 +18,6 @@ class ProdutosViewModelTest {
     // Nome da função está estranho.
     // Não existe divisão de Arrange, Act, Assert.
     // Busca por Id ou BuscaTodos?
-
-    @io.mockk.impl.annotations.MockK
-    private lateinit var detalhesProdutoViewModel: DetalhesProdutoViewModel
 
     @io.mockk.impl.annotations.MockK
     private lateinit var produtosRepository: ProdutoRepository
@@ -40,14 +32,20 @@ class ProdutosViewModelTest {
     }
 
     @Test
-    fun buscaPorId_idValido_retornaProdutoValido() {
+    fun buscaTodos_buscaTodosOsProdutos_retornaListaDeProdutos() {
+        //Arrange
+        var i = 0
 
-        every { produtosRepository.buscaPorId(2).value }.returns(Produto(2,"BOLA", 100.toBigDecimal()))
+        //Act
         every { produtosRepository.buscaTodos().value }.returns(mockListObjects())
-
         produtosViewModel = ProdutosViewModel(produtosRepository)
+
+        //Assert
         val listOfItems = produtosViewModel.buscaTodos()
-        Assert.assertEquals(2.toLong(), listOfItems.value?.get(0)?.id)
+        while (i < 3) {
+            Assert.assertEquals(mockListObjects().get(i).nome, listOfItems.value?.get(i)?.nome)
+            i++
+        }
     }
 
     fun mockListObjects(): List<Produto> {
